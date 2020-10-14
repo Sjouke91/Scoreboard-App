@@ -7,6 +7,10 @@ export default function player(props) {
     props.incrementScore(props.id);
   };
 
+  const onClickReset = () => {
+    props.resetScore(props.id);
+  };
+
   return (
     <div>
       <li className="Player">
@@ -17,6 +21,7 @@ export default function player(props) {
         <p>
           Hello {props.name} Your score: {props.score}
           <button onClick={onClickIncrement}>increment</button>
+          <button onClick={onClickReset}>Reset</button>
         </p>
       </li>
     </div>
