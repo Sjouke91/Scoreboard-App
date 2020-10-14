@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import Player from "./Player";
-import AddPlayerForm from "./AddPlayerForm";
+import Player from "../Player/Player";
+import AddPlayerForm from "../AddPlayerForm";
+import "./Scoreboard.scss";
 
 function compare_score(a, b) {
   return b.score - a.score;
@@ -50,6 +51,27 @@ export default function Scoreboard() {
     set_players(new_players_array);
   }
 
+  function resetScoreToRandom() {
+    const new_players_array = players.map((player) => {
+      let randomNum = Math.floor(Math.random() * 100);
+      console.log("is this random", randomNum);
+      return {
+        ...player,
+        score: player.score - player.score + randomNum,
+      };
+    });
+    set_players(new_players_array);
+  }
+
+  function addPlayer(name) {
+    console.log("name:", name);
+    const newPlayer = { id: players.length + 1, name: name, score: 0 };
+    console.log(newPlayer);
+    const new_players = [...players, newPlayer];
+    console.log(new_players);
+    set_players(new_players);
+  }
+
   console.log(players_sorted);
   return (
     <div className="Scoreboard">
@@ -60,6 +82,7 @@ export default function Scoreboard() {
           <option value="name">Sort by name</option>
         </select>
       </p>
+      <button onClick={resetScoreToRandom}>Reset</button>
       {players_sorted.map((player) => {
         return (
           <div key={player.id}>
@@ -73,7 +96,7 @@ export default function Scoreboard() {
         );
       })}
 
-      <AddPlayerForm />
+      <AddPlayerForm addPlayer={addPlayer} />
     </div>
   );
 }
