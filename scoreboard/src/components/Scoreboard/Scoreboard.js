@@ -72,6 +72,15 @@ export default function Scoreboard() {
     set_players(new_players);
   }
 
+  function resetScore(id) {
+    console.log("I got clicked", id);
+    const resetArray = players.map((player) =>
+      player.id === id ? { ...player, score: 0 } : player
+    );
+    console.log(resetArray);
+    set_players(resetArray);
+  }
+
   console.log(players_sorted);
   return (
     <div className="Scoreboard">
@@ -88,6 +97,7 @@ export default function Scoreboard() {
           <div key={player.id}>
             <Player
               incrementScore={incrementScore}
+              resetScore={resetScore}
               id={player.id}
               name={player.name}
               score={player.score}
