@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 export default function AddPlayerForm(props) {
-  const [newPlayer, setNewPlayer] = useState();
+  const [newPlayer, setNewPlayer] = useState("Sjouke");
 
   const addPlayer = () => {
     props.addPlayer(newPlayer);
@@ -18,6 +18,7 @@ export default function AddPlayerForm(props) {
           }}
           type="text"
           placeholder="Name"
+          value={newPlayer}
         />{" "}
         <button onClick={addPlayer}>Add</button>
       </p>
